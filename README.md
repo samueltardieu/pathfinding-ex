@@ -23,21 +23,28 @@ The algorithms are generic over their arguments.
 - **BFS** (breadth-first search): find the shortest path in an unweighted graph ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search))
 - **Bidirectional search**: simultaneously explore paths forwards from the start and backwards from the goal ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Bidirectional_search))
 - **DFS** (depth-first search): explore by going as far as possible, then backtrack ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search))
+- **IDDFS** (iterative deepening DFS): find shortest paths by iteratively deepening the search ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search))
 - **Dijkstra**: find the shortest path in a weighted graph ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm))
 - **A\***: heuristic-guided shortest path search ([⇒ Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm))
+- **Cycle detection**: detect cycles using Floyd's or Brent's algorithm ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Cycle_detection))
 
 ### Undirected graphs
 
 - **Connected components**: find disjoint connected sets of vertices ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Connected_component_(graph_theory)))
 
+### Data Structures
+
+- **Grid**: rectangular grid for pathfinding with obstacles and diagonal movement
+- **Matrix**: 2D matrix for storing arbitrary data with neighbor queries
+
 ### Future Algorithms
 
 The following algorithms from the Rust version are planned for future releases:
-- IDA*, IDDFS, Fringe search
-- Edmonds-Karp (maximum flow)
-- Cycle detection (Floyd, Brent), path counting
-- Strongly connected components, topological sort
+- IDA* (iterative deepening A*)
+- Topological sort, strongly connected components
 - Yen's k-shortest paths algorithm
+- Path counting in DAGs
+- Edmonds-Karp (maximum flow)
 - Undirected graph algorithms: Kruskal, Prim (MST), cliques (Bron-Kerbosch)
 - Matching algorithms: Kuhn-Munkres (Hungarian algorithm)
 

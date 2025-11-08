@@ -15,14 +15,22 @@ defmodule Pathfinding do
   - `Pathfinding.Directed.BFS.bfs_reach/2`: visit all reachable nodes in BFS order
   - `Pathfinding.Directed.DFS.dfs/3`: explore depth-first, finding a path
   - `Pathfinding.Directed.DFS.dfs_reach/2`: visit all reachable nodes in DFS order
+  - `Pathfinding.Directed.IDDFS.iddfs/3`: iterative deepening depth-first search
   - `Pathfinding.Directed.Dijkstra.dijkstra/3`: find shortest path in weighted graphs
   - `Pathfinding.Directed.Dijkstra.dijkstra_all/2`: find all reachable nodes with costs
   - `Pathfinding.Directed.Astar.astar/4`: heuristic-guided shortest path (A* algorithm)
+  - `Pathfinding.Directed.CycleDetection.floyd/2`: detect cycles using Floyd's algorithm
+  - `Pathfinding.Directed.CycleDetection.brent/2`: detect cycles using Brent's algorithm
 
   ### Undirected graphs
 
   - `Pathfinding.Undirected.ConnectedComponents.connected_components/2`: find all connected components
   - `Pathfinding.Undirected.ConnectedComponents.components_count/2`: count connected components
+
+  ### Data Structures
+
+  - `Pathfinding.Grid`: rectangular grid with obstacles and neighbor queries
+  - `Pathfinding.Matrix`: 2D matrix for storing arbitrary data
 
   ## Working with Graphs
 
