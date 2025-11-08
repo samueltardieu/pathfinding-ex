@@ -22,12 +22,23 @@ The algorithms are generic over their arguments.
 
 - **BFS** (breadth-first search): find the shortest path in an unweighted graph ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search))
 - **Bidirectional search**: simultaneously explore paths forwards from the start and backwards from the goal ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Bidirectional_search))
+- **DFS** (depth-first search): explore by going as far as possible, then backtrack ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search))
+- **Dijkstra**: find the shortest path in a weighted graph ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm))
+- **A\***: heuristic-guided shortest path search ([⇒ Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm))
+
+### Undirected graphs
+
+- **Connected components**: find disjoint connected sets of vertices ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Connected_component_(graph_theory)))
 
 ### Future Algorithms
 
 The following algorithms from the Rust version are planned for future releases:
-- DFS, A*, Dijkstra, IDA*, IDDFS, Fringe, Edmonds-Karp, cycle detection, path counting, strongly connected components, topological sort, Yen's algorithm
-- Undirected graph algorithms: connected components, Kruskal, Prim, cliques
+- IDA*, IDDFS, Fringe search
+- Edmonds-Karp (maximum flow)
+- Cycle detection (Floyd, Brent), path counting
+- Strongly connected components, topological sort
+- Yen's k-shortest paths algorithm
+- Undirected graph algorithms: Kruskal, Prim (MST), cliques (Bron-Kerbosch)
 - Matching algorithms: Kuhn-Munkres (Hungarian algorithm)
 
 ## Using this library

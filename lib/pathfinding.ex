@@ -11,16 +11,18 @@ defmodule Pathfinding do
   ### Directed graphs
 
   - `Pathfinding.Directed.BFS.bfs/3`: find the shortest path using breadth-first search
-  - `Pathfinding.Directed.BFS.bfs_bidirectional/4`: simultaneously explore paths forwards from the start and backwards from the goal
+  - `Pathfinding.Directed.BFS.bfs_bidirectional/4`: bidirectional search from start and goal
   - `Pathfinding.Directed.BFS.bfs_reach/2`: visit all reachable nodes in BFS order
-  - `Pathfinding.Directed.DFS.dfs/3`: explore a graph by going as far as possible, then backtrack
+  - `Pathfinding.Directed.DFS.dfs/3`: explore depth-first, finding a path
   - `Pathfinding.Directed.DFS.dfs_reach/2`: visit all reachable nodes in DFS order
-  - `Pathfinding.Directed.Astar.astar/4`: find the shortest path using A* with a heuristic
-  - `Pathfinding.Directed.Dijkstra.dijkstra/3`: find the shortest path in a weighted graph
+  - `Pathfinding.Directed.Dijkstra.dijkstra/3`: find shortest path in weighted graphs
+  - `Pathfinding.Directed.Dijkstra.dijkstra_all/2`: find all reachable nodes with costs
+  - `Pathfinding.Directed.Astar.astar/4`: heuristic-guided shortest path (A* algorithm)
 
   ### Undirected graphs
 
-  - `Pathfinding.Undirected.ConnectedComponents.connected_components/2`: find disjoint connected sets of vertices
+  - `Pathfinding.Undirected.ConnectedComponents.connected_components/2`: find all connected components
+  - `Pathfinding.Undirected.ConnectedComponents.components_count/2`: count connected components
 
   ## Working with Graphs
 
@@ -45,6 +47,26 @@ defmodule Pathfinding do
   result = Pathfinding.Directed.BFS.bfs({1, 1}, &Knight.successors/1, fn p -> p == goal end)
   {:ok, path} = result
   assert length(path) == 5
+  ```
+
+  For weighted graphs, use Dijkstra or A*:
+
+  ```elixir
+  # Dijkstra for weighted graphs
+  successors_with_cost = fn {x, y} ->
+    Knight.successors({x, y}) |> Enum.map(fn pos -> {pos, 1} end)
+  end
+
+  result = Pathfinding.Directed.Dijkstra.dijkstra({1, 1}, successors_with_cost, fn p -> p == goal end)
+  {:ok, {path, cost}} = result
+
+  # A* with heuristic for better performance
+  heuristic = fn {x, y} ->
+    abs(elem(goal, 0) - x) + abs(elem(goal, 1) - y)
+  end
+
+  result = Pathfinding.Directed.Astar.astar({1, 1}, successors_with_cost, heuristic, fn p -> p == goal end)
+  {:ok, {path, cost}} = result
   ```
 
   ## License
