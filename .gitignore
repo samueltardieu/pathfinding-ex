@@ -2,3 +2,8 @@ target
 mutants.out*
 flamegraph.svg
 perf.data*
+
+# Elixir
+_build
+deps
+*.ez
