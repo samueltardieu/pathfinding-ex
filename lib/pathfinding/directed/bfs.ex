@@ -39,7 +39,8 @@ defmodule Pathfinding.Directed.BFS do
   assert length(path) == 5
   ```
   """
-  def bfs(start, successors, success) when is_function(successors, 1) and is_function(success, 1) do
+  def bfs(start, successors, success)
+      when is_function(successors, 1) and is_function(success, 1) do
     if success.(start) do
       {:ok, [start]}
     else
@@ -251,7 +252,8 @@ defmodule Pathfinding.Directed.BFS do
         neighbors = next_fn.(node)
 
         {new_queue, new_visited, meeting} =
-          Enum.reduce(neighbors, {rest_queue, visited, nil}, fn neighbor, {q_acc, v_acc, meet_acc} ->
+          Enum.reduce(neighbors, {rest_queue, visited, nil}, fn neighbor,
+                                                                {q_acc, v_acc, meet_acc} ->
             cond do
               meet_acc != nil ->
                 # Already found meeting point

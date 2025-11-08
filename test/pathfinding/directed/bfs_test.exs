@@ -6,8 +6,14 @@ defmodule Pathfinding.Directed.BFSTest do
     test "finds shortest path for knight moves on chess board" do
       successors = fn {x, y} ->
         [
-          {x + 1, y + 2}, {x + 1, y - 2}, {x - 1, y + 2}, {x - 1, y - 2},
-          {x + 2, y + 1}, {x + 2, y - 1}, {x - 2, y + 1}, {x - 2, y - 1}
+          {x + 1, y + 2},
+          {x + 1, y - 2},
+          {x - 1, y + 2},
+          {x - 1, y - 2},
+          {x + 2, y + 1},
+          {x + 2, y - 1},
+          {x - 2, y + 1},
+          {x - 2, y - 1}
         ]
       end
 
@@ -71,8 +77,14 @@ defmodule Pathfinding.Directed.BFSTest do
     test "finds shortest path for knight moves" do
       successors = fn {x, y} ->
         [
-          {x + 1, y + 2}, {x + 1, y - 2}, {x - 1, y + 2}, {x - 1, y - 2},
-          {x + 2, y + 1}, {x + 2, y - 1}, {x - 2, y + 1}, {x - 2, y - 1}
+          {x + 1, y + 2},
+          {x + 1, y - 2},
+          {x - 1, y + 2},
+          {x - 1, y - 2},
+          {x + 2, y + 1},
+          {x + 2, y - 1},
+          {x - 2, y + 1},
+          {x - 2, y - 1}
         ]
       end
 

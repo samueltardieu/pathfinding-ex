@@ -1,60 +1,82 @@
 # pathfinding
 
-[![Current Version](https://img.shields.io/crates/v/pathfinding.svg)](https://crates.io/crates/pathfinding)
-[![Documentation](https://docs.rs/pathfinding/badge.svg)](https://docs.rs/pathfinding)
-[![License: Apache-2.0/MIT](https://img.shields.io/crates/l/pathfinding.svg)](#license)
+This library implements pathfinding, flow, and graph algorithms in Elixir.
 
-This crate implements several pathfinding, flow, and graph algorithms in [Rust](https://rust-lang.org/). The algorithms are generic over their arguments. See [the documentation](https://docs.rs/pathfinding) for more information about the various algorithms.
+## Installation
 
-## Using this crate
+Add `pathfinding` to your list of dependencies in `mix.exs`:
 
-In your `Cargo.toml`, put:
-
-``` ini
-[dependencies]
-pathfinding = "4.14.0"
+```elixir
+def deps do
+  [
+    {:pathfinding, "~> 4.14"}
+  ]
+end
 ```
 
-You can then pull your preferred algorithm (BFS in this example) using:
+## Algorithms
 
-``` rust
-use pathfinding::prelude::bfs;
+The algorithms are generic over their arguments.
+
+### Directed graphs
+
+- **BFS** (breadth-first search): find the shortest path in an unweighted graph ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search))
+- **Bidirectional search**: simultaneously explore paths forwards from the start and backwards from the goal ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Bidirectional_search))
+
+### Future Algorithms
+
+The following algorithms from the Rust version are planned for future releases:
+- DFS, A*, Dijkstra, IDA*, IDDFS, Fringe, Edmonds-Karp, cycle detection, path counting, strongly connected components, topological sort, Yen's algorithm
+- Undirected graph algorithms: connected components, Kruskal, Prim, cliques
+- Matching algorithms: Kuhn-Munkres (Hungarian algorithm)
+
+## Using this library
+
+You can pull your preferred algorithm using:
+
+```elixir
+alias Pathfinding.Directed.BFS
 ```
 
 ## Example
 
-We will search the shortest path on a chess board to go from (1, 1) to (4, 6) doing only knight
-moves.
+We will search the shortest path on a chess board to go from `{1, 1}` to `{4, 6}` doing only knight moves.
 
-``` rust
-use pathfinding::prelude::bfs;
+```elixir
+defmodule Knight do
+  def successors({x, y}) do
+    [
+      {x + 1, y + 2}, {x + 1, y - 2}, {x - 1, y + 2}, {x - 1, y - 2},
+      {x + 2, y + 1}, {x + 2, y - 1}, {x - 2, y + 1}, {x - 2, y - 1}
+    ]
+  end
+end
 
-#[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-struct Pos(i32, i32);
+goal = {4, 6}
+{:ok, path} = Pathfinding.Directed.BFS.bfs({1, 1}, &Knight.successors/1, fn p -> p == goal end)
+IO.inspect(length(path))  # Output: 5
+```
 
-impl Pos {
-  fn successors(&self) -> Vec<Pos> {
-    let &Pos(x, y) = self;
-    vec![Pos(x+1,y+2), Pos(x+1,y-2), Pos(x-1,y+2), Pos(x-1,y-2),
-         Pos(x+2,y+1), Pos(x+2,y-1), Pos(x-2,y+1), Pos(x-2,y-1)]
-  }
-}
+You can also use an inline function:
 
-static GOAL: Pos = Pos(4, 6);
-let result = bfs(&Pos(1, 1), |p| p.successors(), |p| *p == GOAL);
-assert_eq!(result.expect("no path found").len(), 5);
+```elixir
+successors = fn {x, y} ->
+  [
+    {x + 1, y + 2}, {x + 1, y - 2}, {x - 1, y + 2}, {x - 1, y - 2},
+    {x + 2, y + 1}, {x + 2, y - 1}, {x - 2, y + 1}, {x - 2, y - 1}
+  ]
+end
+
+goal = {4, 6}
+{:ok, path} = Pathfinding.Directed.BFS.bfs({1, 1}, successors, fn p -> p == goal end)
+IO.inspect(length(path))  # Output: 5
 ```
 
 ## Working with Graphs
 
-If you want to use this library with traditional graph structures (nodes, edges, and weights), see the [Graph Guide](GRAPH_GUIDE.md) for comprehensive examples showing:
+This library does not provide a fixed graph data structure. Instead, the algorithms accept a **successor function** that defines how to navigate from one node to its neighbors.
 
-- How to represent graphs (adjacency lists, adjacency matrices, edge lists)
-- Using A* and Dijkstra with weighted graphs
-- Using BFS and DFS with unweighted graphs
-- Practical examples for spatial shortest paths
-- Converting from other languages (R, Python)
-- Tips and best practices
+For comprehensive examples showing how to represent graphs (adjacency lists, adjacency matrices, edge lists, etc.), see the [Graph Guide](GRAPH_GUIDE.md).
 
 ## License
 
@@ -62,26 +84,17 @@ This code is released under a dual Apache 2.0 / MIT free software license.
 
 ## Contributing
 
-You are welcome to contribute by opening [issues](https://github.com/evenfurther/pathfinding/issues)
-or submitting [pull requests](https://github.com/evenfurther/pathfinding/pulls). Please open an issue
-before implementing a new feature, in case it is a work in progress already or it is fit for this
-repository.
+You are welcome to contribute by opening [issues](https://github.com/samueltardieu/pathfinding-ex/issues) or submitting [pull requests](https://github.com/samueltardieu/pathfinding-ex/pulls).
 
-In order to pass the continuous integration tests, your code must be formatted using the latest
-`rustfmt` with the nightly rust toolchain, and pass `cargo clippy` and [`pre-commit`](https://pre-commit.com/) checks.
-Those will run automatically when you submit a pull request. You can install `pre-commit` to your
-checked out version of the repository by running:
+In order to pass the continuous integration tests, your code must be formatted using `mix format` and pass all tests with `mix test`.
 
-```bash
-$ pre-commit install --hook-type commit-msg
-```
+## Migration from Rust
 
-This repository uses the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) commit message style, such as:
+This library is a partial port of the original Rust `pathfinding` crate. The API has been adapted to follow Elixir conventions:
 
-- feat(matrix): add `Matrix::transpose()`
-- fix(tests): remove unused imports
+- Functions return `{:ok, result}` or `:error` instead of `Some(result)` or `None`
+- Closures are replaced with anonymous functions
+- Type constraints are handled through guards and pattern matching
 
-Each commit must be self-sufficient and clean. If during inspection or code review you need to make further changes to a commit, please squash it. You may use `git rebase -i`, or more convenient tools such as [`jj`](https://martinvonz.github.io/jj/latest/) or [`git-branchless`](https://github.com/arxanas/git-branchless), in order to manipulate your git commits.
+More algorithms will be ported in future releases.
 
-If a pull-request should automatically close an open issue, please
-include "Fix #xxx# or "Close #xxx" in the pull-request cover-letter.
