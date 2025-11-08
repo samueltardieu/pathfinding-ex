@@ -27,26 +27,29 @@ The algorithms are generic over their arguments.
 - **Dijkstra**: find the shortest path in a weighted graph ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm))
 - **A\***: heuristic-guided shortest path search ([⇒ Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm))
 - **Cycle detection**: detect cycles using Floyd's or Brent's algorithm ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Cycle_detection))
+- **Topological sort**: find a topological order in a DAG ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Topological_sorting))
 
 ### Undirected graphs
 
 - **Connected components**: find disjoint connected sets of vertices ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Connected_component_(graph_theory)))
+- **Kruskal**: find a minimum spanning tree ([⇒ Wikipedia](https://en.wikipedia.org/wiki/Kruskal%27s_algorithm))
 
 ### Data Structures
 
 - **Grid**: rectangular grid for pathfinding with obstacles and diagonal movement
 - **Matrix**: 2D matrix for storing arbitrary data with neighbor queries
 
-### Future Algorithms
+### Additional Algorithms (Available in Rust Version)
 
-The following algorithms from the Rust version are planned for future releases:
+The following specialized algorithms from the Rust version could be added in future:
 - IDA* (iterative deepening A*)
-- Topological sort, strongly connected components
+- Strongly connected components
 - Yen's k-shortest paths algorithm
+- Prim's MST algorithm
 - Path counting in DAGs
 - Edmonds-Karp (maximum flow)
-- Undirected graph algorithms: Kruskal, Prim (MST), cliques (Bron-Kerbosch)
-- Matching algorithms: Kuhn-Munkres (Hungarian algorithm)
+- Fringe search
+- Cliques (Bron-Kerbosch algorithm)
 
 ## Using this library
 

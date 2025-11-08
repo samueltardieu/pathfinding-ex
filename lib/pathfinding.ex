@@ -21,11 +21,13 @@ defmodule Pathfinding do
   - `Pathfinding.Directed.Astar.astar/4`: heuristic-guided shortest path (A* algorithm)
   - `Pathfinding.Directed.CycleDetection.floyd/2`: detect cycles using Floyd's algorithm
   - `Pathfinding.Directed.CycleDetection.brent/2`: detect cycles using Brent's algorithm
+  - `Pathfinding.Directed.TopologicalSort.topological_sort/2`: find topological order in DAG
 
   ### Undirected graphs
 
   - `Pathfinding.Undirected.ConnectedComponents.connected_components/2`: find all connected components
   - `Pathfinding.Undirected.ConnectedComponents.components_count/2`: count connected components
+  - `Pathfinding.Undirected.Kruskal.kruskal/1`: find minimum spanning tree
 
   ### Data Structures
 
