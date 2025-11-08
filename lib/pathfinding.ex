@@ -22,12 +22,15 @@ defmodule Pathfinding do
   - `Pathfinding.Directed.CycleDetection.floyd/2`: detect cycles using Floyd's algorithm
   - `Pathfinding.Directed.CycleDetection.brent/2`: detect cycles using Brent's algorithm
   - `Pathfinding.Directed.TopologicalSort.topological_sort/2`: find topological order in DAG
+  - `Pathfinding.Directed.StronglyConnectedComponents.strongly_connected_components/2`: find all SCCs
+  - `Pathfinding.Directed.CountPaths.count_paths/3`: count all paths to a goal in a DAG
 
   ### Undirected graphs
 
   - `Pathfinding.Undirected.ConnectedComponents.connected_components/2`: find all connected components
   - `Pathfinding.Undirected.ConnectedComponents.components_count/2`: count connected components
-  - `Pathfinding.Undirected.Kruskal.kruskal/1`: find minimum spanning tree
+  - `Pathfinding.Undirected.Kruskal.kruskal/1`: find minimum spanning tree (Kruskal's algorithm)
+  - `Pathfinding.Undirected.Prim.prim/1`: find minimum spanning tree (Prim's algorithm)
 
   ### Data Structures
 
